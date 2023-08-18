@@ -18,16 +18,18 @@ class productManager {
             };
             this.products.push(product);
             productManager.id++;
-            return product;
+
+        const campoIncompleto = Object.values(product).some(valor => valor === "");
+
+        if(campoIncompleto) {
+            return console.log('por favor completa todos los campos')
         }
 
-        codeVerification = (code) => {
-            const codeExiste = this.products.find((product) => product.code === code)
+        const codeExiste = this.products.find((product) => product.code === code)
             if (codeExiste) {
-                console.log('la propiedad code ya existe por favor escribe una nueva')
-                return;
+                return console.log ('la propiedad code ya existe en otro producto por favor escribe una nueva')
             } else {
-                this.getProducts()
+                return product;
             }
         }
 
@@ -46,6 +48,3 @@ const producto1 = productos.addProduct('naranja', 'rica', 200, 'http/naranja.jpg
 
 const productoslala = new productManager('productoslala')
 const producto2 = productoslala.addProduct('manzana', 'jeje', 400, 'http/maranja.jpg', 4, 58)
-
-
-console.log(productoslala.getProductsById(1))
